@@ -18,16 +18,14 @@ def get_key(key):
     return str(key)
 
 
-def get_int(value):
-    return int(value)
-
 
 class Kvdict:
     def __init__(self, dict_file="word_dict.db"):
         self.__dict = bsddb3.hashopen(dict_file)
+        self.convert_value = lambda x: x
 
     def __getitem__(self, item):
-        return self._get_value(self.__dict[str(item)])
+        return self.convert_value(self.__dict[str(item)])
 
     def __setitem__(self, key, value):
         self.__dict[get_key(key)] = str(value)
@@ -43,7 +41,7 @@ class Kvdict:
             self.__setitem__(key, value)
 
     def get(self, k, d=None):
-        return self._get_value(self.__dict.get(get_key(k), d))
+        return self.convert_value(self.__dict.get(get_key(k), d))
 
     def close(self):
         self.__dict.close()

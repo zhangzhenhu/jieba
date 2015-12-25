@@ -20,13 +20,13 @@ if __name__ == "__main__":
     freq_dict = Kvdict("word_freq.db")
     tag_dict = Kvdict("word_tag.db")
     jieba.dt.initialize()
-
+    freq_dict.convert_value = lambda x: int(x)
     jieba.dt.FREQ = freq_dict
+    from jieba import posseg as pg
+    pg.initialize()
+    pg.dt.word_tag_tab = tag_dict
 
-    jieba.posseg.initialize()
-    jieba.posseg.dt.word_tag_tab = tag_dict
-
-    jieba.posseg.cut("我爱北京天安门")
+    pg.cut("我爱北京天安门")
 
 
 
