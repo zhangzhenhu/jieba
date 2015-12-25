@@ -64,16 +64,18 @@ if __name__ == "__main__":
 
     for k, v in jieba.dt.FREQ.iteritems():
         freq_dict[k] = v
-    from jieba import posseg as pg
-    pg.initialize()
-    for k, v in pg.dt.word_tag_tab.iteritems():
+
+    jieba.dt.FREQ = freq_dict
+    for k, v in jieba.dt.word_tag_tab.iteritems():
         tag_dict[k] = v
+    jieba.dt.word_tag_tab = tag_dict
 
     for line in sys.stdin:
         line = line.strip().split('\t')
         word = line[0]
-        freq_dict[word] = 1000000
-        tag_dict[word] = "n"
+        # freq_dict[word] = 1000000
+        # tag_dict[word] = "n"
+        jieba.dt.add_word(word,1000000,"n")
 
     freq_dict.close()
     tag_dict.close()
