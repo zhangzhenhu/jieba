@@ -60,11 +60,11 @@ if __name__ == "__main__":
     tag_dict = Kvdict("word_tag.db")
     jieba.dt.initialize()
 
-    for k, v in jieba.dt.FREQ:
+    for k, v in jieba.dt.FREQ.iteritems():
         freq_dict[k] = v
 
     jieba.posseg.initialize()
-    for k, v in jieba.posseg.dt.word_tag_tab:
+    for k, v in jieba.posseg.dt.word_tag_tab.iteriterms():
         tag_dict[k] = v
 
     for line in sys.stdin:
