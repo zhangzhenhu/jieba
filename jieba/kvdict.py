@@ -36,6 +36,10 @@ class Kvdict:
     def __contains__(self, item):
         return get_key(item) in self.__dict
 
+    def __delitem__(self, key):
+
+        self.__dict.__delitem__(key)
+
     def update(self, target_dict):
         for key, value in target_dict.iteritems():
             self.__setitem__(key, value)
