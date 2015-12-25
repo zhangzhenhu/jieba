@@ -20,7 +20,7 @@ if __name__ == "__main__":
     freq_dict = Kvdict("word_freq.db")
     tag_dict = Kvdict("word_tag.db")
     jieba.dt.initialize()
-    freq_dict.convert_value = lambda x: int(x)
+    freq_dict.convert_value = lambda x: x if x is None else int(x)
     jieba.dt.FREQ = freq_dict
     from jieba import posseg as pg
     pg.initialize()
