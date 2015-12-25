@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # import pdb
     # pdb.set_trace()
     for line in sys.stdin:
-        for x,y in pg.cut("我爱北京天安门"):
+        for x,y in pg.cut(line):
             print "(%s,%s)" % (x, y),
         print
     freq_dict.close()
