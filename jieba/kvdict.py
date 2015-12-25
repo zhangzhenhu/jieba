@@ -64,7 +64,7 @@ if __name__ == "__main__":
         freq_dict[k] = v
     from jieba import posseg as pg
     pg.initialize()
-    for k, v in pg.dt.word_tag_tab.iteriterms():
+    for k, v in pg.dt.word_tag_tab.iteritems():
         tag_dict[k] = v
 
     for line in sys.stdin:
