@@ -20,7 +20,9 @@ if __name__ == "__main__":
     freq_dict = Kvdict("word_freq.db")
     tag_dict = Kvdict("word_tag.db")
     jieba.dt.initialize()
+
     jieba.dt.FREQ = freq_dict
+
     jieba.posseg.initialize()
     jieba.posseg.dt.word_tag_tab = tag_dict
 

@@ -36,7 +36,6 @@ class Kvdict:
         return self.__dict.__iter__()
 
     def __contains__(self, item):
-
         return get_key(item) in self.__dict
 
     def update(self, target_dict):
@@ -55,9 +54,18 @@ class Kvdict:
 
 if __name__ == "__main__":
     import sys
+    import jieba
 
     freq_dict = Kvdict("word_freq.db")
     tag_dict = Kvdict("word_tag.db")
+    jieba.dt.initialize()
+
+    for k, v in jieba.dt.FREQ:
+        freq_dict[k] = v
+
+    jieba.posseg.initialize()
+    for k, v in jieba.posseg.dt.word_tag_tab:
+        tag_dict[k] = v
 
     for line in sys.stdin:
         line = line.strip().split('\t')
@@ -67,4 +75,3 @@ if __name__ == "__main__":
 
     freq_dict.close()
     tag_dict.close()
-
