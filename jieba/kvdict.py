@@ -18,12 +18,16 @@ def get_key(key):
     return str(key)
 
 
+def get_int(value):
+    return int(value)
+
+
 class Kvdict:
     def __init__(self, dict_file="word_dict.db"):
         self.__dict = bsddb3.hashopen(dict_file)
 
     def __getitem__(self, item, vtype=int):
-        return vtype(self.__dict[str(item)])
+        return self._get_value(self.__dict[str(item)])
 
     def __setitem__(self, key, value):
         self.__dict[get_key(key)] = str(value)
@@ -40,7 +44,28 @@ class Kvdict:
             self.__setitem__(key, value)
 
     def get(self, k, d=None):
-        return self.__dict.get(get_key(k), d)
+        return self._get_value(self.__dict.get(get_key(k), d))
 
     def close(self):
         self.__dict.close()
+
+    def _get_value(self, value):
+        return value
+
+
+if __name__ == "__main__":
+    import sys
+
+    freq_dict = Kvdict("word_freq.db")
+    tag_dict = Kvdict("word_tag.db")
+
+
+    for line in sys.stdin:
+        line = line.strip().split('\t')
+        word = line[1]
+        freq_dict[word] = 1000000
+        tag_dict[word] = "n"
+
+    freq_dict.close()
+    tag_dict.close()
+
