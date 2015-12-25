@@ -61,14 +61,14 @@ class Tokenizer(object):
         else:
             self.dictionary = _get_abs_path(dictionary)
         if bsddb_freq is not None:
-            self.FREQ = kvdict(bsddb_freq)
+            self.FREQ = Kvdict(bsddb_freq)
             self.use_bsddb_freq = True
         else:
             self.FREQ = {}
             self.use_bsddb_freq = False
 
         if bsddb_tag is not None:
-            self.user_word_tag_tab = kvdict(bsddb_tag)
+            self.user_word_tag_tab = Kvdict(bsddb_tag)
             self.use_bsddb_tag = True
         else:
             self.user_word_tag_tab = {}
