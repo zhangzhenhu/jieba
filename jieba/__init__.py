@@ -1,5 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-__version__ = '0.37'
+__version__ = '0.37.1'
 __license__ = 'MIT'
 
 import re
@@ -14,6 +14,8 @@ from math import log
 from hashlib import md5
 from ._compat import *
 from . import finalseg
+from .kvdict import kvdict
+
 
 if os.name == 'nt':
     from shutil import move as _replace_file
@@ -49,17 +51,30 @@ def setLogLevel(log_level):
     global logger
     default_logger.setLevel(log_level)
 
+
 class Tokenizer(object):
 
-    def __init__(self, dictionary=DEFAULT_DICT):
+    def __init__(self, dictionary=DEFAULT_DICT, bsddb_freq=None, bsddb_tag=None):
         self.lock = threading.RLock()
         if dictionary == DEFAULT_DICT:
             self.dictionary = dictionary
         else:
             self.dictionary = _get_abs_path(dictionary)
-        self.FREQ = {}
+        if bsddb_freq is not None:
+            self.FREQ = kvdict(bsddb_freq)
+            self.use_bsddb_freq = True
+        else:
+            self.FREQ = {}
+            self.use_bsddb_freq = False
+
+        if bsddb_tag is not None:
+            self.user_word_tag_tab = kvdict(bsddb_tag)
+            self.use_bsddb_tag = True
+        else:
+            self.user_word_tag_tab = {}
+            self.user_word_tag_tab = False
+
         self.total = 0
-        self.user_word_tag_tab = {}
         self.initialized = False
         self.tmp_dir = None
         self.cache_file = None
