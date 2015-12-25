@@ -25,10 +25,11 @@ if __name__ == "__main__":
     from jieba import posseg as pg
     pg.initialize()
     pg.dt.word_tag_tab = tag_dict
-    import pdb
-    pdb.set_trace()
+    # import pdb
+    # pdb.set_trace()
     for x,y in pg.cut("我爱北京天安门"):
         print x,y
-
+    freq_dict.close()
+    tag_dict.close()
 
 
