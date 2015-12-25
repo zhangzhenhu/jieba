@@ -25,7 +25,7 @@ class Kvdict:
         self.convert_value = lambda x: x
 
     def __getitem__(self, item):
-        return self.convert_value(self.__dict[str(item)])
+        return self.convert_value(self.__dict[get_key(item)])
 
     def __setitem__(self, key, value):
         self.__dict[get_key(key)] = str(value)
