@@ -27,8 +27,10 @@ if __name__ == "__main__":
     pg.dt.word_tag_tab = tag_dict
     # import pdb
     # pdb.set_trace()
-    for x,y in pg.cut("我爱北京天安门"):
-        print x,y
+    for line in sys.stdin:
+        for x,y in pg.cut("我爱北京天安门"):
+            print "(%s,%s)" % (x, y),
+        print
     freq_dict.close()
     tag_dict.close()
 
