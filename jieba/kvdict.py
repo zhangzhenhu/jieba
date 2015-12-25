@@ -18,8 +18,8 @@ def get_key(key):
     return str(key)
 
 
-class kvdict:
-    def __int__(self, dict_file="word_dict.db"):
+class Kvdict:
+    def __init__(self, dict_file="word_dict.db"):
         self.__dict = bsddb3.hashopen(dict_file)
 
     def __getitem__(self, item, vtype=int):

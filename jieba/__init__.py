@@ -14,7 +14,7 @@ from math import log
 from hashlib import md5
 from ._compat import *
 from . import finalseg
-from .kvdict import kvdict
+from .kvdict import Kvdict
 
 
 if os.name == 'nt':
