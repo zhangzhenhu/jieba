@@ -62,9 +62,9 @@ if __name__ == "__main__":
 
     for k, v in jieba.dt.FREQ.iteritems():
         freq_dict[k] = v
-
-    jieba.posseg.initialize()
-    for k, v in jieba.posseg.dt.word_tag_tab.iteriterms():
+    from jieba import posseg as pg
+    pg.initialize()
+    for k, v in pg.dt.word_tag_tab.iteriterms():
         tag_dict[k] = v
 
     for line in sys.stdin:
