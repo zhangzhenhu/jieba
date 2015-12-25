@@ -72,7 +72,7 @@ class Tokenizer(object):
             self.use_bsddb_tag = True
         else:
             self.user_word_tag_tab = {}
-            self.user_word_tag_tab = False
+            self.use_bsddb_tag = False
 
         self.total = 0
         self.initialized = False
