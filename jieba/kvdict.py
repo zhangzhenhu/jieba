@@ -26,7 +26,7 @@ class Kvdict:
     def __init__(self, dict_file="word_dict.db"):
         self.__dict = bsddb3.hashopen(dict_file)
 
-    def __getitem__(self, item, vtype=int):
+    def __getitem__(self, item):
         return self._get_value(self.__dict[str(item)])
 
     def __setitem__(self, key, value):
@@ -59,10 +59,9 @@ if __name__ == "__main__":
     freq_dict = Kvdict("word_freq.db")
     tag_dict = Kvdict("word_tag.db")
 
-
     for line in sys.stdin:
         line = line.strip().split('\t')
-        word = line[1]
+        word = line[0]
         freq_dict[word] = 1000000
         tag_dict[word] = "n"
 
