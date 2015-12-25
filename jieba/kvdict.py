@@ -65,10 +65,10 @@ if __name__ == "__main__":
     for k, v in jieba.dt.FREQ.iteritems():
         freq_dict[k] = v
 
-    for k, v in jieba.dt.word_tag_tab.iteritems():
+    for k, v in jieba.dt.user_word_tag_tab.iteritems():
         tag_dict[k] = v
     jieba.dt.FREQ = freq_dict
-    jieba.dt.word_tag_tab = tag_dict
+    jieba.dt.user_word_tag_tab = tag_dict
 
     for line in sys.stdin:
         line = line.strip().split('\t')
