@@ -27,9 +27,12 @@ if __name__ == "__main__":
     pg.dt.word_tag_tab = tag_dict
     # import pdb
     # pdb.set_trace()
+    pg.dt.add_word("上海电力股份有限公司",1000000,"n")
     for line in sys.stdin:
+        line = line.strip()
+        print line,jieba.dt.FREQ[line],
         for x, y in pg.cut(line.strip()):
-            print "(%s,%s)" % (x, y),
+            print (u"(%s,%s)" % (x, y)).encode("utf8"),
         print
     freq_dict.close()
     tag_dict.close()
